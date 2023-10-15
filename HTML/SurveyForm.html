@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Form</title>
+    <!-- Add Bootstrap CSS link -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <!-- Add Bootstrap JS and jQuery links for modal -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <style>
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+
+        #form-heading {
+            text-align: center;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        .modal-dialog {
+            max-width: 600px;
+        }
+
+        .modal-content {
+            padding: 20px;
+        }
+
+        .modal-title {
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .modal-body {
+            font-size: 18px;
+        }
+
+        #closeModal {
+            font-size: 24px;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            color: #fff;
+        }
+
+        .btn-secondary {
+            background-color: #6c757d;
+            color: #fff;
+        }
+
+        .form-check-input {
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2 id="form-heading">Form</h2>
+        <form id="myForm">
+            <div class="form-group">
+                <label for="firstName">First Name:</label>
+                <input type="text" class="form-control" id="firstName" name="firstName" required>
+            </div>
+
+            <div class="form-group">
+                <label for="lastName">Last Name:</label>
+                <input type="text" class="form-control" id="lastName" name="lastName" required>
+            </div>
+
+            <div class="form-group">
+                <label for="dob">Date of Birth:</label>
+                <input type="date" class="form-control" id="dob" name="dob" required>
+            </div>
+
+            <div class="form-group">
+                <label for="country">Country:</label>
+                <select class="form-control" id="country" name="country" required>
+                    <option value="" disabled selected>Select your country</option>
+                    <option value="India">India</option>
+                    <option value="USA">United States</option>
+                    <option value="Canada">Canada</option>
+                    <option value="UK">United Kingdom</option>
+                    <option value="Australia">Australia</option>
+                    <option value="Germany">Germany</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Gender:</label><br>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="gender" id="male" value="Male" required>
+                    <label class="form-check-label" for="male">Male</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="gender" id="female" value="Female" required>
+                    <label class="form-check-label" for="female">Female</label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="profession">Profession:</label>
+                <input type="text" class="form-control" id="profession" name="profession" required>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" class="form-control" id="email" name="email" required>
+            </div>
+
+            <div class="form-group">
+                <label for="mobile">Mobile Number:</label>
+                <input type="tel" class="form-control" id="mobile" name="mobile" required>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="reset" class="btn btn-secondary">Reset</button>
+        </form>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal" id="myModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title">Submitted Values</h2>
+                    <button type="button" class="close" data-dismiss="modal" id="closeModal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <p>First Name: <span id="modalFirstName"></span></p>
+                    <p>Last Name: <span id="modalLastName"></span></p>
+                    <p>Date of Birth: <span id="modalDOB"></span></p>
+                    <p>Country: <span id="modalCountry"></span></p>
+                    <p>Gender: <span id="modalGender"></span></p>
+                    <p>Profession: <span id="modalProfession"></span></p>
+                    <p>Email: <span id="modalEmail"></span></p>
+                    <p>Mobile Number: <span id="modalMobile"></span></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" id="resetForm">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const form = document.getElementById("myForm");
+
+        form.addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            const firstName = document.getElementById("firstName").value;
+            const lastName = document.getElementById("lastName").value;
+            const dob = document.getElementById("dob").value;
+            const country = document.getElementById("country").value;
+            const gender = document.querySelector('input[name="gender"]:checked').value;
+            const profession = document.getElementById("profession").value;
+            const email = document.getElementById("email").value;
+            const mobile = document.getElementById("mobile").value;
+
+            $('#myModal').modal('show');
+            document.getElementById("modalFirstName").textContent = firstName;
+            document.getElementById("modalLastName").textContent = lastName;
+            document.getElementById("modalDOB").textContent = dob;
+            document.getElementById("modalCountry").textContent = country;
+            document.getElementById("modalGender").textContent = gender;
+            document.getElementById("modalProfession").textContent = profession;
+            document.getElementById("modalEmail").textContent = email;
+            document.getElementById("modalMobile").textContent = mobile;
+        });
+
+        document.getElementById("resetForm").addEventListener("click", function() {
+            form.reset();
+        });
+    </script>
+</body>
+</html>
